@@ -1,0 +1,12 @@
+FoamFile { version 2.0; format ascii; class volScalarField; object p_rgh; }
+#include "$FOAM_CASE/constant/caseParams"
+dimensions [1 -1 -2 0 0];
+internalField uniform $pOut;
+boundaryField
+{
+    inlet        { type zeroGradient; }
+    outlet       { type fixedValue; value $internalField; }
+    "(top|bottom)Wall" { type symmetryPlane; }
+    hydrofoil    { type fixedFluxPressure; }
+    frontAndBack { type empty; }
+}

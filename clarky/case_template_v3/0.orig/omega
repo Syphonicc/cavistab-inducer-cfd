@@ -1,0 +1,12 @@
+FoamFile { version 2.0; format ascii; class volScalarField; object omega; }
+#include "$FOAM_CASE/constant/caseParams"
+dimensions [0 0 -1 0 0];
+internalField uniform $omegaIn;
+boundaryField
+{
+    inlet        { type fixedValue; value $internalField; }
+    outlet       { type inletOutlet; inletValue $internalField; value $internalField; }
+    "(top|bottom)Wall" { type symmetryPlane; }
+    hydrofoil    { type omegaWallFunction; value $internalField; }
+    frontAndBack { type empty; }
+}

@@ -1,0 +1,24 @@
+# Papers: copyrighted PDFs and extracted text stay local only
+papers/
+
+# Simulation output (GBs). Only small summaries of runs are tracked (see below).
+clarky/runs/**
+!clarky/runs/*/
+!clarky/runs/v5_*/summary.txt
+!clarky/runs/v5_*/history.png
+processor*/
+postProcessing/
+log.*
+*.tar.gz
+*.foam
+
+# OpenFOAM build artefacts
+**/lnInclude/
+**/Make/linux64*/
+**/Make/*Opt/
+
+# Python / editors
+__pycache__/
+*.pyc
+.vscode/
+.idea/

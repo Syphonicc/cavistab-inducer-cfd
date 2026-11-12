@@ -1,0 +1,12 @@
+FoamFile { version 2.0; format ascii; class volVectorField; object U; }
+#include "$FOAM_CASE/constant/caseParams"
+dimensions [0 1 -1 0 0];
+internalField uniform ($Uinf 0 0);
+boundaryField
+{
+    inlet        { type fixedValue; value $internalField; }
+    outlet       { type pressureInletOutletVelocity; value $internalField; }
+    "(top|bottom)Wall" { type symmetryPlane; }
+    hydrofoil    { type noSlip; }
+    frontAndBack { type empty; }
+}

@@ -1,0 +1,86 @@
+FoamFile { version 2.0; format ascii; class dictionary; object controlDict; }
+application     interPhaseChangeFoam;
+startFrom       latestTime;
+startTime       0;
+stopAt          endTime;
+endTime         0.35;          // 50 c/U
+deltaT          1e-7;
+writeControl    adjustable;
+writeInterval   0.05;
+purgeWrite      2;
+writeFormat     binary;
+writePrecision  8;
+writeCompression off;
+timeFormat      general;
+timePrecision   8;
+runTimeModifiable yes;
+adjustTimeStep  on;
+maxCo           1;
+maxAlphaCo      1;
+maxDeltaT       1e-4;
+
+functions
+{
+    // integral of alpha.water; vapour volume = (Volume in header) - integral
+    cavity
+    {
+        type            volFieldValue;
+        libs            (fieldFunctionObjects);
+        fields          (alpha.water);
+        operation       volIntegrate;
+        regionType      all;
+        writeFields     false;
+        writePrecision  12;
+        writeControl    timeStep;
+        writeInterval   5;
+    }
+    inletP
+    {
+        type            surfaceFieldValue;
+        libs            (fieldFunctionObjects);
+        regionType      patch;
+        name            inlet;
+        fields          (p);
+        operation       areaAverage;
+        writeFields     false;
+        writeControl    timeStep;
+        writeInterval   5;
+    }
+    forces
+    {
+        type            forceCoeffs;
+        libs            (forces);
+        patches         (hydrofoil);
+        rho             rho;
+        rhoInf          999.19;
+        CofR            (0.035 0 0);
+        liftDir         (0 1 0);
+        dragDir         (1 0 0);
+        pitchAxis       (0 0 1);
+        magUInf         10;
+        lRef            0.07;
+        Aref            7e-05;   // c * dz
+        writeControl    timeStep;
+        writeInterval   5;
+    }
+    yPlus
+    {
+        type            yPlus;
+        libs            (fieldFunctionObjects);
+        writeControl    writeTime;
+    }
+    foilAlpha
+    {
+        type            surfaces;
+        libs            (sampling);
+        surfaceFormat   raw;
+        fields          (alpha.water p);
+        interpolate     false;
+        writeControl    adjustable;
+        writeInterval   0.001;
+        surfaces
+        {
+            foil { type patch; patches (hydrofoil); }
+        }
+    }
+}

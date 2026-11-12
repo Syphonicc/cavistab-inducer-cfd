@@ -1,0 +1,13 @@
+case            <project>/clarky/runs/v5_reboud_s0.8
+t_end           0.4000 s  (57.1 c/U)
+avg window      t >= 0.1500 s
+sigma_inlet     0.853 +- 0.190
+Vvap/(c^2 dz)   0.0590 +- 0.0144
+Cl              0.760 +- 0.198
+Cd              0.1385 +- 0.0388
+A_cav/Sc        0.976 +- 0.230   (10% vapour region; Huang 2013: 0.72 exp)
+f_peak A_cav    20.0 Hz  St=0.140
+Vvap/Sc         0.730   (Huang 2013: 0.72 exp, sigma=0.8)
+f_peak Vvap     24.0 Hz  St=0.168
+f_peak Cl       24.0 Hz  St=0.168   (window 36 c/U)
+L_cav/c         0.149 +- 0.170  (alpha<0.9, 251 samples)

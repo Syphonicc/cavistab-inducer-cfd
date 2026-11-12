@@ -1,0 +1,19 @@
+// Clark-Y 11.7%, setup of Huang et al. (2013) JFE 135:071301 / Wang et al. (2001) PAS 37:551
+// v4: hold at sigma=10 (not 3): at sigma=3 the transient LE suction peak (Cp~-3.1, steady -2.7)
+// cavitated during the hold and the cavity persisted (Cl -> 2.5). Ramp 0.03 -> 0.08 s.
+// c = 70 mm, aoa = 8 deg, U = 10 m/s, Re = 7e5, tunnel 10c x 2.7c, LE 4c from inlet
+// water at 25 C (Huang 2013): rho 999.19, mu 1.139e-3, rho_v 0.02308, mu_v 9.8626e-6, pv 3169
+// sigma = (p_inf - pSat)/(0.5 rho U^2). Outlet pressure ramps from sigmaStart to sigma
+// (Huang: start fully wetted, lower tunnel pressure progressively). True sigma from inlet patch.
+Uinf        10;
+rhoL        999.19;
+pSat        3169;
+sigma       0.8;
+sigmaStart  10.0;     // v4: was 3 -> transient LE overshoot cavitated during hold
+tHold       0.03;      // hold fully wetted until tHold
+tRamp       0.08;      // reach target sigma at tRamp (v4: slower ramp, was 0.05)
+qInf        #eval{ 0.5*$rhoL*$Uinf*$Uinf };
+pOut        #eval{ $pSat + $sigma*$qInf };
+pStart      #eval{ $pSat + $sigmaStart*$qInf };
+kIn         0.06;      // Tu = 2 % (Huang 2013)
+omegaIn     64;        // l = 0.1 c

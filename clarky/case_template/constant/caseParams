@@ -1,0 +1,11 @@
+// Clark-Y 11.7%, Wang et al. (2001) setup -- VERIFY against the paper:
+// c = 70 mm, aoa = 8 deg, U = 10 m/s, Re = 7e5, test section 0.7 x 0.19 (x 0.07) m
+// sigma = (p_inf - pSat) / (0.5 rho U^2); outlet pressure set from sigma, true sigma
+// is recomputed from the inlet-patch average pressure in post-processing.
+Uinf      10;
+rhoL      998.2;
+pSat      2340;
+sigma     0.8;
+pOut      #eval{ $pSat + $sigma*0.5*$rhoL*$Uinf*$Uinf };
+kIn       0.015;     // Tu = 1 %
+omegaIn   32;        // l = 0.1 c
