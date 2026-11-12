@@ -50,3 +50,23 @@ Averages over t = 0.15–0.40 s (36 c/U); experiment values from reference_data.
 FFT resolution 4 Hz (0.25 s window). Open issues: Cd ~15–25 % high and cavity ~35 % large at
 σ = 0.8; inlet σ 0.85 vs outlet 0.80 (experiment references upstream pressure) — next run
 should target σ_inlet; mesh-independence not yet checked; Wang Cl/Cd values are eyeballed.
+
+## 2026-11-12 — σ sweep (v5): 2.0, 1.4, 1.0, 0.8 → `sigma_sweep_v1.png/.csv`
+| σ inlet | Cl | Wang Cl* | Cd | Wang Cd* | A_cav/Sc |
+|---|---|---|---|---|---|
+| 2.005 | 1.177 | 1.16 | 0.023 | 0.037 | 0.02 |
+| 1.458 | 1.055 | 1.17 | 0.112 | 0.040 | 0.34 |
+| 1.091 | 0.852 | 1.03 | 0.137 | 0.120 | 0.74 |
+| 0.853 | 0.760 | 0.78 | 0.139 | 0.115 | 0.98 |
+\*eyeballed from Wang Fig. 16.
+
+**Finding:** the CFD Cl/Cd-vs-σ curve is shifted to higher σ by roughly 0.4–0.5: the model
+loses lift / gains drag earlier (at σ = 1.4 it has a large unsteady cavity where the
+experiment has a thin stable sheet). Consistent with steady Cp_min = −2.71: the equilibrium
+mass-transfer model cavitates as soon as p < pSat, while tunnel water shows inception only
+around σ ≈ 1.6–2.0. Agreement at σ = 0.8 is therefore partly coincidental.
+
+**Options:** calibrate Schnerr–Sauer (nuclei n, dNuc, Cv/Cc) against the sheet regime; an
+effective tension / pSat offset; check mesh dependence first (LE suction peak is resolution-
+sensitive). For K = −dV_c/dp the *slope* of cavity volume vs σ matters — the shift must be
+understood before extracting K.
