@@ -93,3 +93,23 @@ reference and digitise Fig. 16 before tuning further.
 
 Laptop temps during 4–8-core runs (536 samples): CPU max 87.9 °C, mean 75.8 °C (`runs/temps.csv`).
 Earlier run loss at 13:40 was a system suspend, not thermal; runs now wrapped in `systemd-inhibit`.
+
+## 2026-11-13 — Wang Fig. 16 digitised; σ reference checked
+- σ reference: Huang 2013 (same group/tunnel) — σ uses the *upstream tunnel pressure*. CFD
+  comparisons already use σ_inlet → reference choice explains ≤ 0.05 of the shift.
+- Digitised 8° data: `clarky/wang2001_fig16_8deg_v1.csv` (±0.01 Cl, ±0.002 Cd).
+  Comparison `scripts/compare_sigma_v2.py` → `sigma_sweep_v2.png/.csv`:
+
+| σ_in | Cl CFD | Cl exp | ΔCl | Cd CFD | Cd exp | σ-shift to match Cl |
+|---|---|---|---|---|---|---|
+| 0.853 | 0.760 | 0.850 | −0.09 | 0.139 | 0.116 | +0.09 |
+| 1.091 | 0.852 | 1.093 | −0.24 | 0.137 | 0.106 | +0.24 |
+| 1.458 | 1.055 | 1.166 | −0.11 | 0.112 | 0.040 | +0.41 |
+| 2.005 | 1.177 | 1.152 | +0.03 | 0.023 | 0.037 | (flat branch) |
+
+**Revised finding:** σ = 0.8 "agreement" was an artefact of the eyeballed reference (CFD Cl is
+0.09 low). The discrepancy is not a constant σ-offset: the experiment keeps Cl ≈ 1.17 (stable
+sheet, no lift penalty) down to σ ≈ 1.2 then drops steeply; CFD loses lift gradually from σ ≈ 2.
+The model lacks the stable-sheet regime → a single tension/pSat offset cannot fix it across σ.
+Candidates: sheet stability / closure (Reboud exponent n, re-entrant jet), other mass-transfer
+models (Zwart, Kunz, Merkle), and the inception threshold — test at σ = 1.4 where error is largest.

@@ -1,0 +1,20 @@
+# Wang et al. (2001) Prog. Aerosp. Sci. 37:551, Fig. 16, Clark-Y alpha = 8 deg, U = 10 m/s.
+# Digitised from 400-dpi render: axes calibrated from tick pixels; flat-region points by template
+# matching (Cl 1.152/1.172), sloped points read on 0.01-0.02 grids. Uncertainty ~ +-0.01 (Cl),
+# +-0.002 (Cd). sigma = (p_tunnel - pv)/(0.5 rho U^2), p_tunnel = upstream pressure (Huang 2013).
+sigma,Cl,Cd
+0.30,0.17,0.047
+0.40,0.29,0.071
+0.50,0.44,0.087
+0.60,0.58,0.101
+0.70,0.69,0.113
+0.80,0.80,0.115
+0.90,0.895,0.117
+1.00,1.02,0.121
+1.20,1.18,0.089
+1.40,1.172,0.041
+1.60,1.152,0.036
+1.80,1.152,0.036
+2.00,1.152,0.0367
+2.50,1.152,0.0375
+3.00,1.152,0.0375
