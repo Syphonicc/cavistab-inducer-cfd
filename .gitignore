@@ -22,3 +22,10 @@ __pycache__/
 *.pyc
 .vscode/
 .idea/
+!clarky/runs/cal_*/summary.txt
+!clarky/runs/cal_*/history.png
+!clarky/runs/cloud_v5/
+!clarky/runs/cloud_v5/*/
+!clarky/runs/cloud_v5/*/summary.txt
+!clarky/runs/cloud_v5/*/history.png
+!clarky/runs/temps.csv

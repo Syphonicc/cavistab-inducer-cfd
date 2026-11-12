@@ -70,3 +70,26 @@ around σ ≈ 1.6–2.0. Agreement at σ = 0.8 is therefore partly coincidental.
 effective tension / pSat offset; check mesh dependence first (LE suction peak is resolution-
 sensitive). For K = −dV_c/dp the *slope* of cavity volume vs σ matters — the shift must be
 understood before extracting K.
+
+## 2026-11-12 — mesh independence + Schnerr–Sauer calibration at σ = 1.4
+**Mesh (CloudHPC, `cloud_v5/fine1.5_s1.4`, 73.7k vs 32.6k cells, 0.40 s, 3.9 h on 4 cores):**
+Cl 1.055 → 1.074 (+1.8 %), Cd 0.112 → 0.118 (+5 %), A_cav/Sc 0.34 → 0.38, f(Vvap) 16 Hz both.
+→ the σ-shift is not a resolution effect; 32.6k mesh adequate for screening.
+
+**Schnerr–Sauer coefficients (32.6k, run to 0.25 s, avg 0.15–0.25 s = 14 c/U):**
+| Run | Cl | Cd | A_cav/Sc |
+|---|---|---|---|
+| baseline n 1.6e13, Cv 1 | 1.055 | 0.112 | 0.34 |
+| Cv 0.1 | 1.086 | 0.121 | 0.40 |
+| Cv 0.01 | 1.100 | 0.092 | 0.28 |
+| n 1e11 | 1.039 | 0.098 | 0.27 |
+| n 1e9 | 1.045 | 0.106 | 0.29 |
+| Wang (eyeballed) | ≈ 1.17 | ≈ 0.04 | thin stable sheet |
+
+→ mass-transfer *rate* has little effect (Cd at best 0.09). The error is the inception
+threshold (vapour wherever p < pSat; steady Cp_min = −2.71), not the vaporisation rate.
+Next candidates: effective tension (pSat offset) / inception criterion; check Wang σ
+reference and digitise Fig. 16 before tuning further.
+
+Laptop temps during 4–8-core runs (536 samples): CPU max 87.9 °C, mean 75.8 °C (`runs/temps.csv`).
+Earlier run loss at 13:40 was a system suspend, not thermal; runs now wrapped in `systemd-inhibit`.

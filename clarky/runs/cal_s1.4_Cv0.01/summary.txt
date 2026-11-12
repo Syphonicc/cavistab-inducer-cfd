@@ -1,0 +1,13 @@
+case            <project>/clarky/runs/cal_s1.4_Cv0.01
+t_end           0.2500 s  (35.7 c/U)
+avg window      t >= 0.1500 s
+sigma_inlet     1.452 +- 0.862
+Vvap/(c^2 dz)   0.0154 +- 0.0149
+Cl              1.100 +- 0.436
+Cd              0.0922 +- 0.0836
+A_cav/Sc        0.278 +- 0.243   (10% vapour region; Huang 2013: 0.72 exp)
+f_peak A_cav    20.0 Hz  St=0.140
+Vvap/Sc         0.191   (Huang 2013: 0.72 exp, sigma=0.8)
+f_peak Vvap     20.0 Hz  St=0.140
+f_peak Cl       10.0 Hz  St=0.070   (window 14 c/U)
+L_cav/c         0.259 +- 0.176  (alpha<0.9, 101 samples)
