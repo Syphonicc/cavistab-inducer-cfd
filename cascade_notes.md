@@ -38,3 +38,7 @@
   (ramped σ 10 → target), inflow direction fixed at α (pressureDirectedInletVelocity), outlet fixed
   volumetric flow U·d·sin(β−α)·dz (flowRateOutletVelocity). BC check: inlet p exact, stable.
 - Post-processing: `scripts/postprocess_cascade_v1.py` (σ_in, V_c/d², A_cav/d², L_cav/d, std/mean).
+- v2 diverged at 6.15 ms (Cl → 1e33, Δt → 1e-32): pressure inlet + flowRate outlet unstable here.
+- v3 (`case_template_v3`, `run_cascade_v3.sh`): v1's stable BCs (fixed U at inlet, p at outlet) +
+  codedFixedValue outlet controller driving the inlet area-averaged p_rgh to the hold/ramp target
+  (gain 0.05, once per time step, |Δp| ≤ 5 kPa/step). Check: inlet p within 0.5 % of target in 2 ms.

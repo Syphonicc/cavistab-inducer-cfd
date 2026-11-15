@@ -1,0 +1,50 @@
+FoamFile { version 2.0; format ascii; class volScalarField; object p_rgh; }
+#include "$FOAM_CASE/constant/caseParams"
+dimensions [1 -1 -2 0 0];
+internalField uniform $pStart;
+boundaryField
+{
+    #includeEtc "caseDicts/setConstraintTypes"
+    inlet        { type zeroGradient; }
+    outlet
+    {
+        // numbers filled in by run_cascade_v3.sh (dictionary $vars are not expanded inside #{ #})
+        // drive the INLET area-averaged p_rgh to the hold/ramp target by adjusting outlet p
+        type            codedFixedValue;
+        value           uniform $pStart;
+        name            inletSigmaControl;
+        code
+        #{
+            const scalar t  = this->db().time().value();
+            const scalar pS = @PSTART@;
+            const scalar pT = @PIN@;
+            const scalar tH = @THOLD@;
+            const scalar tR = @TRAMP@;
+            const scalar k  = @KGAIN@;
+            const scalar pTarget =
+                (t <= tH) ? pS : ((t >= tR) ? pT : pS + (pT - pS)*(t - tH)/(tR - tH));
+            const fvMesh& mesh = this->patch().boundaryMesh().mesh();
+            const label inletID = mesh.boundaryMesh().findPatchID("inlet");
+            const volScalarField& prgh = mesh.lookupObject<volScalarField>("p_rgh");
+            const scalarField& pInB = prgh.boundaryField()[inletID];
+            const scalarField& magSf = mesh.magSf().boundaryField()[inletID];
+            const scalar pInAvg = gSum(pInB*magSf)/gSum(magSf);
+            // update once per time step (BC is evaluated many times per step with the same
+            // inlet pressure -> stacking corrections diverged); cap the change per step
+            static label lastIndex = -1;
+            const label idx = this->db().time().timeIndex();
+            if (idx != lastIndex && idx > 0)
+            {
+                lastIndex = idx;
+                const scalar pOld = gAverage(*this);
+                const scalar dp = max(min(k*(pTarget - pInAvg), scalar(5000)), scalar(-5000));
+                operator==(pOld + dp);
+            }
+            else
+            {
+                operator==(gAverage(*this));
+            }
+        #};
+    }
+    "blade.*"    { type fixedFluxPressure; }
+}
