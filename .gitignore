@@ -24,6 +24,8 @@ __pycache__/
 .idea/
 !clarky/runs/cal_*/summary.txt
 !clarky/runs/cal_*/history.png
+!clarky/runs/mod_*/summary.txt
+!clarky/runs/mod_*/history.png
 !clarky/runs/cloud_v5/
 !clarky/runs/cloud_v5/*/
 !clarky/runs/cloud_v5/*/summary.txt

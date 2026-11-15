@@ -113,3 +113,22 @@ sheet, no lift penalty) down to σ ≈ 1.2 then drops steeply; CFD loses lift gr
 The model lacks the stable-sheet regime → a single tension/pSat offset cannot fix it across σ.
 Candidates: sheet stability / closure (Reboud exponent n, re-entrant jet), other mass-transfer
 models (Zwart, Kunz, Merkle), and the inception threshold — test at σ = 1.4 where error is largest.
+
+## 2026-11-15 — model comparison at σ = 1.4 (`run_case_v9.sh`, 2 cores each, avg 0.15–0.30 s)
+| Run | σ_in | Cl | Cd | A_cav/Sc |
+|---|---|---|---|---|
+| baseline Schnerr–Sauer, Reboud n = 10 | 1.458 | 1.055 | 0.112 | 0.34 |
+| Kunz (Cc = Cv = 1000, U∞ 10, t∞ 0.007) | 1.485 | 1.107 | 0.126 | 0.47 |
+| Reboud n = 3 | 1.436 | 1.024 | 0.100 | 0.26 |
+| Merkle (Cc 80, Cv 1e-3) | — | failed: Δt collapsed to 1e-13 s, 14 ms in 18 h | | |
+| tension pSat_eff = −16.8 kPa | — | failed: FPE at step 1 (SchnerrSauer uses 0.01·pSat as a floor → invalid for pSat < 0) | | |
+| Wang (digitised) | 1.46 | 1.166 | 0.040 | thin stable sheet |
+
+**Go/no-go (Cd < 0.06 and Cl > 1.12): no model passes.** Clark-Y calibration closed.
+**Documented limitation:** with interPhaseChangeFoam + k-ω SST (Reboud) and any of the tested
+mass-transfer models/coefficients, the stable partial-sheet regime (σ ≈ 1.2–1.6 at 8°) is not
+reproduced: cavity too large/unsteady, Cd 2.5–3× too high, Cl 5–12 % low. Inception-threshold
+handling (effective tension) remains untested (needs a model that accepts an offset, e.g. a
+modified Schnerr–Sauer with p − (pSat − Δp) in the driving term).
+Max CPU temperature during the 8-core run: 95.5 °C (alert threshold 97 °C) → use ≤ 6 cores
+or better cooling for long runs.

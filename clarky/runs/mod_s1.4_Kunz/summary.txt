@@ -1,0 +1,13 @@
+case            <project>/clarky/runs/mod_s1.4_Kunz
+t_end           0.3000 s  (42.9 c/U)
+avg window      t >= 0.1500 s
+sigma_inlet     1.485 +- 0.547
+Vvap/(c^2 dz)   0.0261 +- 0.0248
+Cl              1.107 +- 0.434
+Cd              0.1260 +- 0.0864
+A_cav/Sc        0.470 +- 0.426   (10% vapour region; Huang 2013: 0.72 exp)
+f_peak A_cav    6.7 Hz  St=0.047
+Vvap/Sc         0.323   (Huang 2013: 0.72 exp, sigma=0.8)
+f_peak Vvap     6.7 Hz  St=0.047
+f_peak Cl       6.7 Hz  St=0.047   (window 21 c/U)
+L_cav/c         0.236 +- 0.202  (alpha<0.9, 151 samples)
