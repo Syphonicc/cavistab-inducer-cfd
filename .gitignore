@@ -31,3 +31,7 @@ __pycache__/
 !clarky/runs/cloud_v5/*/summary.txt
 !clarky/runs/cloud_v5/*/history.png
 !clarky/runs/temps.csv
+cascade/runs/**
+!cascade/runs/*/
+!cascade/runs/*/summary.txt
+!cascade/runs/*/history.png
