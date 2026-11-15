@@ -42,3 +42,9 @@
 - v3 (`case_template_v3`, `run_cascade_v3.sh`): v1's stable BCs (fixed U at inlet, p at outlet) +
   codedFixedValue outlet controller driving the inlet area-averaged p_rgh to the hold/ramp target
   (gain 0.05, once per time step, |Δp| ≤ 5 kPa/step). Check: inlet p within 0.5 % of target in 2 ms.
+- v3 smoke (resumed from 0.05 s) diverged at t = 0.093 s, ~13 ms after the ramp: with a cavity present
+  the per-step controller drove inlet p into 0.5–3.9 MPa oscillations (Δt → 7e-9). Cavity compliance
+  delays the outlet→inlet pressure response, so the closed loop over-corrects (a surge-like loop).
+- v4 (`case_template_v4`, `run_cascade_v4.sh`): controller only during hold + ramp (gain 0.02/step),
+  outlet p frozen for t ≥ tRamp → stable v1-type BCs while the cavity develops; inlet σ then drifts,
+  so each run records its actual σ_in (K is a slope through the runs' (σ_in, V_c) points).

@@ -1,0 +1,15 @@
+FoamFile { version 2.0; format ascii; class dictionary; object turbulenceProperties; }
+simulationType RAS;
+RAS
+{
+    RASModel        kOmegaSSTReboud;     // clarky/src/kOmegaSSTReboud
+    turbulence      on;
+    printCoeffs     on;
+    kOmegaSSTReboudCoeffs
+    {
+        alphaName   alpha.water;
+        rhoL        999.19;
+        rhoV        0.02308;
+        nReboud     10;
+    }
+}
