@@ -1,0 +1,24 @@
+// 2D flat-plate cascade (Otsuka et al. 1996 baseline): beta = 15 deg, pitch d = 0.05 m, chord 3d.
+// Blade-aligned coordinates: inflow at incidence alphaDeg to the blades (upward -> lower boundary
+// bladeSS is the suction side). sigma = (p_inlet - pv)/(0.5 rho U^2); outlet pressure ramps from
+// sigmaStart to sigma (hold until tHold, target at tRamp). True sigma from inlet-patch average.
+// Set sigma / alphaDeg with sed (never foamDictionary -set: it freezes the #eval values).
+Uinf        10;
+alphaDeg    5.0;
+rhoL        999.19;
+pSat        3169;
+sigma       0.2;
+sigmaStart  10.0;
+tHold       0.03;
+tRamp       0.08;
+qInf        #eval{ 0.5*$rhoL*$Uinf*$Uinf };
+pIn         #eval{ $pSat + $sigma*$qInf };
+pStart      #eval{ $pSat + $sigmaStart*$qInf };
+Ux          #eval{ $Uinf*cos(degToRad($alphaDeg)) };
+Uy          #eval{ $Uinf*sin(degToRad($alphaDeg)) };
+betaDeg     15;
+pitch       0.05;
+dz          0.001;
+Qout        #eval{ $Uinf*$pitch*sin(degToRad($betaDeg - $alphaDeg))*$dz };
+kIn         0.06;
+omegaIn     64;

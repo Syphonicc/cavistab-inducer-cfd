@@ -1,0 +1,6 @@
+case             <project>/cascade/runs/smoke_s0.20_a5
+t_end            0.1199 s   avg window t >= 0.0900 s
+sigma_inlet      0.0142 +- 0.0002
+Vvap/d2          0.10672 +- 0.03672   (std/mean 0.344)
+Acav/d2          0.13729 +- 0.04578   (alpha<0.9; std/mean 0.333)
+Lcav/d           0.143 +- 0.036   (31 samples)

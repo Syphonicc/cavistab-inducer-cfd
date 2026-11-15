@@ -1,0 +1,16 @@
+FoamFile { version 2.0; format ascii; class volScalarField; object p_rgh; }
+#include "$FOAM_CASE/constant/caseParams"
+dimensions [1 -1 -2 0 0];
+internalField uniform $pStart;
+boundaryField
+{
+    #includeEtc "caseDicts/setConstraintTypes"
+    inlet
+    {
+        type            uniformFixedValue;
+        uniformValue    table ( (0 $pStart) ($tHold $pStart) ($tRamp $pIn) (100 $pIn) );
+        value           $internalField;
+    }
+    outlet       { type fixedFluxPressure; }
+    "blade.*"    { type fixedFluxPressure; }
+}

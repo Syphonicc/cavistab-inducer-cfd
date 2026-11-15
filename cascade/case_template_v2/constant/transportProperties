@@ -1,0 +1,8 @@
+FoamFile { version 2.0; format ascii; class dictionary; object transportProperties; }
+phases          (water vapour);
+phaseChangeTwoPhaseMixture SchnerrSauer;
+pSat            3169;   // water at 25 C (Huang 2013)
+sigma           0.07;
+water  { transportModel Newtonian; nu 1.1399e-06; rho 999.19; }
+vapour { transportModel Newtonian; nu 4.2733e-04; rho 0.02308; }
+SchnerrSauerCoeffs { n 1.6e+13; dNuc 2.0e-06; Cc 1; Cv 1; }

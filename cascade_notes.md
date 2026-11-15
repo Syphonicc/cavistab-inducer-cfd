@@ -29,3 +29,12 @@
   Cavitating Inducers," J. Fluids Eng. 104(4):428–433. ← measured K, M (SSME LPOTP)
 - Wan, Spakovszky, Manfredi & Pasini (2021), J. Eng. Gas Turbines Power 143(2):021011
   — open access, MIT DSpace handle 1721.1/134548.
+
+## Cascade setup log
+- v1 (`case_template_v1`, outlet-imposed pressure): smoke at σ_out 0.2 gave σ_inlet 0.014 — the cascade
+  raises static pressure by 0.38 q (non-cavitating) / 0.19 q (heavily cavitating), so inlet σ was
+  uncontrolled; cavity still growing at 0.12 s (near-supercavitating, σ/2α ≈ 0.08). Not a valid test.
+- v2 (`case_template_v2`, `run_cascade_v2.sh`): Otsuka's conditions — inlet static p_rgh imposed
+  (ramped σ 10 → target), inflow direction fixed at α (pressureDirectedInletVelocity), outlet fixed
+  volumetric flow U·d·sin(β−α)·dz (flowRateOutletVelocity). BC check: inlet p exact, stable.
+- Post-processing: `scripts/postprocess_cascade_v1.py` (σ_in, V_c/d², A_cav/d², L_cav/d, std/mean).

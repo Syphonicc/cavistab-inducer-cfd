@@ -1,0 +1,21 @@
+FoamFile { version 2.0; format ascii; class volVectorField; object U; }
+#include "$FOAM_CASE/constant/caseParams"
+dimensions [0 1 -1 0 0];
+internalField uniform ($Ux $Uy 0);
+boundaryField
+{
+    #includeEtc "caseDicts/setConstraintTypes"
+    inlet
+    {
+        type            pressureDirectedInletVelocity;
+        inletDirection  uniform ($Ux $Uy 0);
+        value           uniform ($Ux $Uy 0);
+    }
+    outlet
+    {
+        type            flowRateOutletVelocity;
+        volumetricFlowRate constant $Qout;
+        value           $internalField;
+    }
+    "blade.*"    { type noSlip; }
+}
