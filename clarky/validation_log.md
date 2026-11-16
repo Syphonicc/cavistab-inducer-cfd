@@ -132,3 +132,15 @@ handling (effective tension) remains untested (needs a model that accepts an off
 modified Schnerr–Sauer with p − (pSat − Δp) in the driving term).
 Max CPU temperature during the 8-core run: 95.5 °C (alert threshold 97 °C) → use ≤ 6 cores
 or better cooling for long runs.
+
+## 2026-11-16 — single-foil quasi-steady compliance from the v5 σ sweep (check "C", no new runs)
+| σ_in | V_vap/c² (± std) | A(10 % vapour)/c² |
+|---|---|---|
+| 0.853 | 0.0590 (0.0144) | 0.0790 |
+| 1.091 | 0.0452 (0.0217) | 0.0597 |
+| 1.458 | 0.0213 (0.0142) | 0.0275 |
+| 2.005 | 0.0010 (0.0003) | 0.0015 |
+K_foil = −∂(V_c/c²)/∂σ (finite differences, mid-σ 1.73 / 1.27 / 0.97): 0.037 / 0.065 / 0.058 (V_vap);
+0.047 / 0.088 / 0.081 (10 % area). Sign correct (V_c grows monotonically as σ falls), order of
+magnitude plausible; low-σ trend unresolved — temporal std of V_c (shedding) is as large as the
+differences. → quasi-steady K needs a steady cavity; no kill condition triggered.

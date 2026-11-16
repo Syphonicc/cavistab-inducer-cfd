@@ -60,3 +60,6 @@
   v3 controller oscillated/diverged, v4 choked supercavity (σ_in 0.014), v5 diverged at cavity onset.
   No run has yet held a partial cavity at controlled inlet σ. Common factor in the stiff failures:
   cavity onset at the zero-thickness sharp LE with an inlet pressure constraint.
+- Bounded retry A (agreed 2026-11-16, max 2 runs / 3 days, then kill condition 2 if no steady partial cavity):
+  A1 = `case_template_v6` (v5 BCs, ramp to 0.15 s, maxCo/maxAlphaCo 0.5, nOuter 3), zero-thickness mesh;
+  A2 = finite-thickness blade with rounded LE (new mesh topology, in progress).

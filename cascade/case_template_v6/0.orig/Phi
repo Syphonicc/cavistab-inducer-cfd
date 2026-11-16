@@ -1,0 +1,10 @@
+FoamFile { version 2.0; format ascii; class volScalarField; object Phi; }
+dimensions [0 2 -1 0 0];
+internalField uniform 0;
+boundaryField
+{
+    #includeEtc "caseDicts/setConstraintTypes"
+    inlet        { type fixedValue; value uniform 0; }
+    outlet       { type zeroGradient; }
+    "blade.*"    { type zeroGradient; }
+}
