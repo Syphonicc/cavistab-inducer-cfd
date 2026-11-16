@@ -73,3 +73,9 @@
   instantly with fixed inlet U → pressure impulse on the liquid column. Candidate fix (beyond the
   agreed 2-run cap — needs user OK): smooth S-shaped ramp (zero dp/dt at both ends).
 - A2 (v7, finite-thickness) still running at report time (t ≈ 0.044 s, hold phase).
+- A2 (v7, finite-thickness, rounded LE) diverged at t = 0.1480 s — BEFORE ramp end (0.15), during the
+  ramp at σ_in ≈ 0.4–0.48 (liquid fraction 0.995, Cl steady ≈ 0.11, then Δt → 1e-8). This weakens the
+  ramp-end hypothesis: A1 failed at σ ≈ 0.2 (ramp end), A2 at σ ≈ 0.45 (mid-ramp) — common factor is
+  cavity growth under an inlet pressure constraint in the incompressible solver, not the ramp kink.
+- Retry A cap (2 runs) exhausted with no steady partial cavity → kill condition 2 criteria met.
+  NOT executed: awaiting user decision (2026-11-16).
