@@ -79,3 +79,10 @@
   cavity growth under an inlet pressure constraint in the incompressible solver, not the ramp kink.
 - Retry A cap (2 runs) exhausted with no steady partial cavity → kill condition 2 criteria met.
   NOT executed: awaiting user decision (2026-11-16).
+- Option 2 (user, 2026-11-16): ONE cavitatingFoam test, capped by 2026-11-18.
+  `case_template_cf_v1` (cavitatingFoam, barotropic linear, psil 4.44e-7 (c = 1500 m/s), psiv 7.27e-6,
+  plain kOmegaSST, mesh v2 finite-thickness blade, inlet fixed U + static p ramp, outlet zeroGradient).
+  Impulsive start from uniform U crashed at 0.09 ms (compressible water hammer, NaN in p solve) →
+  `run_cascade_cf_v2.sh` maps A2's liquid state at t = 0.05 s (same mesh, σ_in ≈ 8.4) via mapFields.
+  Mapped start stable (acoustic transient only). Schedule: hold σ 8.4 to 0.005 s, ramp to σ 0.2 by
+  0.10 s, end 0.15 s; 6 cores. Speed ~2 ms / 9 min on 4 cores (acoustic CFL) → CF1 ETA ~12–15 h+.

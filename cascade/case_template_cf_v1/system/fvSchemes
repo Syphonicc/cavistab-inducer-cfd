@@ -1,0 +1,61 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+// v5: laplacian/snGrad "corrected" (was "limited corrected 0.5" from cavitatingBullet tutorial).
+// With the limiter, the VoF flux-reconstruction (fvc::reconstruct) produced a spurious near-wall
+// jet behind the LE -> Cl drifted 1.18 -> 1.9, Cd < 0, even in pure liquid. pimpleFoam unaffected.
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2512                                  |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+FoamFile
+{
+    version         2;
+    format          ascii;
+    class           dictionary;
+    object          fvSchemes;
+}
+
+ddtSchemes
+{
+    default         Euler;
+}
+
+interpolationSchemes
+{
+    default         linear;
+}
+
+divSchemes
+{
+    default         none;
+    div(phi,rho)    Gauss limitedLinear 1;
+    div(rhoPhi,U)   Gauss limitedLinearV 1;
+    div(phi,omega)  Gauss upwind;
+    div(phi,k)      Gauss upwind;
+    div(((rho*nuEff)*dev2(T(grad(U))))) Gauss linear;
+}
+
+gradSchemes
+{
+    default         Gauss linear;
+}
+
+laplacianSchemes
+{
+    default         Gauss linear corrected;
+}
+
+snGradSchemes
+{
+    default         corrected;
+}
+
+wallDist
+{
+    method          meshWave;
+}
+
+
+// ************************************************************************* //

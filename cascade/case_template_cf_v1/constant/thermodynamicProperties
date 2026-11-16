@@ -1,0 +1,7 @@
+FoamFile { version 2.0; format ascii; class dictionary; object thermodynamicProperties; }
+barotropicCompressibilityModel linear;
+psiv            7.27e-06;   // 1/(R T), water vapour at 25 C -> rho_v(pSat) = 0.023 kg/m3
+rholSat         999.19;
+psil            4.44e-07;   // 1/c^2, c = 1500 m/s
+pSat            3169;
+rhoMin          0.001;

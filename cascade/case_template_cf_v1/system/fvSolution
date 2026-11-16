@@ -1,0 +1,12 @@
+FoamFile { version 2.0; format ascii; class dictionary; object fvSolution; }
+solvers
+{
+    rho      { solver smoothSolver; smoother symGaussSeidel; tolerance 1e-08; relTol 0.1; }
+    rhoFinal { $rho; relTol 0; }
+    p        { solver GAMG; smoother GaussSeidel; tolerance 0; relTol 0.1; }
+    pFinal   { $p; tolerance 1e-08; relTol 0; }
+    "(U|k|omega)"      { solver smoothSolver; smoother symGaussSeidel; tolerance 1e-08; relTol 0.1; }
+    "(U|k|omega)Final" { $U; relTol 0; }
+}
+PIMPLE { nOuterCorrectors 2; nCorrectors 3; nNonOrthogonalCorrectors 1; }
+relaxationFactors { equations { ".*" 1; } }
