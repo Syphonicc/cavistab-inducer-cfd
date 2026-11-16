@@ -66,3 +66,10 @@
 - A2 = `case_template_v7` + `make_cascade_blockMesh_v2.py` (t = 1 mm, semicircular LE r = 0.5 mm,
   TE taper 10 mm; 24.6k cells; nose blocks use 45° bisector edges; bad faces only in end blocks),
   `run_cascade_v7.sh`, 2 cores alongside A1 (6 cores total, temp limit). Both started 2026-11-16.
+- A1 (v6) diverged at t = 0.1503 s, exactly at ramp end (tRamp = 0.15): σ_in fell smoothly 3.8 → 0.65,
+  small cavity forming (liquid fraction 0.996), Cl steady 0.08–0.09, then Δt → 1e-8 s.
+  Pattern: v5 diverged at 0.0809 (tRamp 0.08), A1 at 0.1503 (tRamp 0.15) → failure triggered by the
+  abrupt stop of the inlet-pressure ramp (kink in p_in(t)): cavity growth dV_c/dt = −K dσ/dt must stop
+  instantly with fixed inlet U → pressure impulse on the liquid column. Candidate fix (beyond the
+  agreed 2-run cap — needs user OK): smooth S-shaped ramp (zero dp/dt at both ends).
+- A2 (v7, finite-thickness) still running at report time (t ≈ 0.044 s, hold phase).
