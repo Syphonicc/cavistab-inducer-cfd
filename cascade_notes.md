@@ -54,3 +54,9 @@
   (growth lowers inlet p → more growth). Experiments set σ upstream (tank) → must impose inlet p.
 - v5 (`case_template_v5`, `run_cascade_v5.sh`): inlet fixedValue U (U, α) + inlet static p_rgh
   ramp; outlet zeroGradient U (inletOutlet) and p. 4.9 ms check: stable, inlet p exact.
+- v5 smoke diverged at t = 0.0809 s, exactly when the ramp reached σ_in = 0.2 and vapour appeared
+  (Δt → 1.7e-10 s). Hold phase was clean (Cl ≈ 0.1, inlet p on target).
+- Tally (2026-11-16): 5 cascade smokes — v1 wrong σ (outlet-referenced), v2 diverged (6 ms),
+  v3 controller oscillated/diverged, v4 choked supercavity (σ_in 0.014), v5 diverged at cavity onset.
+  No run has yet held a partial cavity at controlled inlet σ. Common factor in the stiff failures:
+  cavity onset at the zero-thickness sharp LE with an inlet pressure constraint.
