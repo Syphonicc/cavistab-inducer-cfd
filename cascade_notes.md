@@ -48,3 +48,9 @@
 - v4 (`case_template_v4`, `run_cascade_v4.sh`): controller only during hold + ramp (gain 0.02/step),
   outlet p frozen for t ≥ tRamp → stable v1-type BCs while the cavity develops; inlet σ then drifts,
   so each run records its actual σ_in (K is a slope through the runs' (σ_in, V_c) points).
+- v4 smoke (controller frozen after ramp) ran stably to 0.20 s but drifted to σ_in = 0.014: one cavity
+  covering the whole suction side (x 0–0.153 m, up to 36 % of passage height), passage at p ≈ pv —
+  choked supercavity. Fixed outlet p + fixed flow is statically unstable for partial cavities
+  (growth lowers inlet p → more growth). Experiments set σ upstream (tank) → must impose inlet p.
+- v5 (`case_template_v5`, `run_cascade_v5.sh`): inlet fixedValue U (U, α) + inlet static p_rgh
+  ramp; outlet zeroGradient U (inletOutlet) and p. 4.9 ms check: stable, inlet p exact.
