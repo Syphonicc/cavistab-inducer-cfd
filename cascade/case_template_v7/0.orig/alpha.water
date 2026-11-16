@@ -1,0 +1,10 @@
+FoamFile { version 2.0; format ascii; class volScalarField; object alpha.water; }
+dimensions [0 0 0 0 0];
+internalField uniform 1;
+boundaryField
+{
+    #includeEtc "caseDicts/setConstraintTypes"
+    inlet        { type fixedValue; value $internalField; }
+    outlet       { type inletOutlet; inletValue $internalField; value $internalField; }
+    "blade.*"    { type zeroGradient; }
+}

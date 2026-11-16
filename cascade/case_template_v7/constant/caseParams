@@ -1,0 +1,25 @@
+// 2D flat-plate cascade (Otsuka et al. 1996 baseline): beta = 15 deg, pitch d = 0.05 m, chord 3d.
+// v7 (bounded retry A2): v6 numerics + finite-thickness blade (t = 1 mm, semicircular LE, tapered TE),
+// mesh from make_cascade_blockMesh_v2.py.
+// v6 (bounded retry A1): v5 BCs + gentler numerics: ramp to 0.15 s, maxCo/maxAlphaCo 0.5, nOuter 3.
+// Blade-aligned coordinates: inflow at incidence alphaDeg to the blades (upward -> lower boundary
+// bladeSS is the suction side). v5: sigma imposed directly at the INLET (static p_rgh ramp sigmaStart -> sigma) together with the
+// fixed inlet velocity; outlet zeroGradient U and p. Outlet-pressure control (v1, v4) runs away to a
+// choked supercavity (cavity growth lowers inlet p -> more growth); v2 (p inlet + flowRate outlet)
+// diverged numerically; v3 closed-loop controller oscillated once a cavity formed.
+// Set sigma / alphaDeg with sed (never foamDictionary -set: it freezes the #eval values).
+Uinf        10;
+alphaDeg    5.0;
+rhoL        999.19;
+pSat        3169;
+sigma       0.2;
+sigmaStart  10.0;
+tHold       0.03;
+tRamp       0.15;      // v6: slower ramp (was 0.08)
+qInf        #eval{ 0.5*$rhoL*$Uinf*$Uinf };
+pIn         #eval{ $pSat + $sigma*$qInf };
+pStart      #eval{ $pSat + $sigmaStart*$qInf };
+Ux          #eval{ $Uinf*cos(degToRad($alphaDeg)) };
+Uy          #eval{ $Uinf*sin(degToRad($alphaDeg)) };
+kIn         0.06;
+omegaIn     64;

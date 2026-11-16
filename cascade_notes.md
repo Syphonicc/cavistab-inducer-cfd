@@ -63,3 +63,6 @@
 - Bounded retry A (agreed 2026-11-16, max 2 runs / 3 days, then kill condition 2 if no steady partial cavity):
   A1 = `case_template_v6` (v5 BCs, ramp to 0.15 s, maxCo/maxAlphaCo 0.5, nOuter 3), zero-thickness mesh;
   A2 = finite-thickness blade with rounded LE (new mesh topology, in progress).
+- A2 = `case_template_v7` + `make_cascade_blockMesh_v2.py` (t = 1 mm, semicircular LE r = 0.5 mm,
+  TE taper 10 mm; 24.6k cells; nose blocks use 45° bisector edges; bad faces only in end blocks),
+  `run_cascade_v7.sh`, 2 cores alongside A1 (6 cores total, temp limit). Both started 2026-11-16.

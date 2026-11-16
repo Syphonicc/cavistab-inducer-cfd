@@ -1,0 +1,11 @@
+FoamFile { version 2.0; format ascii; class volScalarField; object omega; }
+#include "$FOAM_CASE/constant/caseParams"
+dimensions [0 0 -1 0 0];
+internalField uniform $omegaIn;
+boundaryField
+{
+    #includeEtc "caseDicts/setConstraintTypes"
+    inlet        { type fixedValue; value $internalField; }
+    outlet       { type inletOutlet; inletValue $internalField; value $internalField; }
+    "blade.*"    { type omegaWallFunction; value $internalField; }
+}

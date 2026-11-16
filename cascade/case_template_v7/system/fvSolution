@@ -1,0 +1,102 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2512                                  |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+FoamFile
+{
+    version         2;
+    format          ascii;
+    class           dictionary;
+    object          fvSolution;
+}
+
+solvers
+{
+    "alpha.water.*"
+    {
+        cAlpha          0;
+        nAlphaCorr      2;
+        nAlphaSubCycles 1;
+        MULESCorr       yes;
+        nLimiterIter    5;
+        solver          smoothSolver;
+        smoother        symGaussSeidel;
+        tolerance       1e-08;
+        relTol          0;
+        maxIter         10;
+    }
+    "(U|k|omega).*"
+    {
+        solver          smoothSolver;
+        smoother        symGaussSeidel;
+        tolerance       1e-06;
+        relTol          0;
+    }
+    p_rgh
+    {
+        solver          GAMG;
+        tolerance       1e-08;
+        relTol          0.1;
+        smoother        DICGaussSeidel;
+        maxIter         50;
+    }
+    p_rghFinal
+    {
+        solver          PCG;
+        preconditioner
+        {
+            preconditioner  GAMG;
+            tolerance       1e-06;
+            relTol          0;
+            nVcycles        2;
+            smoother        DICGaussSeidel;
+        }
+        tolerance       1e-07;
+        relTol          0;
+        maxIter         50;
+    }
+    "pcorr.*"
+    {
+        solver          GAMG;
+        tolerance       1e-08;
+        relTol          0;
+        smoother        DICGaussSeidel;
+        maxIter         50;
+    }
+    Phi
+    {
+        solver          GAMG;
+        tolerance       1e-08;
+        relTol          0;
+        smoother        DICGaussSeidel;
+        maxIter         50;
+    }
+}
+
+potentialFlow
+{
+    nNonOrthogonalCorrectors 3;
+}
+
+PIMPLE
+{
+    momentumPredictor no;
+    nOuterCorrectors 3;
+    nCorrectors     3;
+    nNonOrthogonalCorrectors 1;
+}
+
+relaxationFactors
+{
+    equations
+    {
+        "(U|k|omega).*" 1;
+    }
+}
+
+
+// ************************************************************************* //
