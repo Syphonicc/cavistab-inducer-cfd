@@ -28,7 +28,7 @@ deltaT          1e-07;
 
 writeControl    adjustable;
 
-writeInterval   0.05;
+writeInterval   0.01;
 
 purgeWrite      2;
 
@@ -51,7 +51,6 @@ maxCo           0.5;
 maxAcousticCo   50;
 
 maxDeltaT       0.0001;
-
 
 functions
 {
