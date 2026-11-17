@@ -1,5 +1,8 @@
 # cavistab — handover (state as of 2026-11-17)
 
+> **Update 2026-11-17:** the owner invoked kill condition 2; the OpenFOAM cascade route is closed.
+> Section 6 below is the pre-decision state, kept for the record. See `docs/FINAL_ASSESSMENT.md`.
+
 Private repo: github.com/Syphonicc/cavistab · local folder: `~/Cryo_project`
 Toolchain: OpenFOAM v2512 (ESI), Python 3 (numpy, scipy, matplotlib), CloudHPC (ESI v2512).
 
@@ -24,7 +27,7 @@ DL-based instability classification from video exist but target different questi
 Caveats: Chinese-language literature (CNKI) and industry in-house tools not searchable.
 
 **Phases:** 0 novelty ✅ · 1 Clark-Y validation ✅ (closed with documented limitation) ·
-2 cascade K, M ❌ (kill condition 2 criteria met, not executed) · 3 surrogate/optimisation ⬜ · 4 3D inducer ⬜
+2 cascade K, M ❌ (killed 2026-11-17) · 3 surrogate/optimisation ⬜ · 4 3D inducer ⬜
 
 ---
 
@@ -97,7 +100,7 @@ steady-state or coupled cavitating solver), (4) tight high-solidity passage with
 **Not impossible in general** — cavitating inducers are routinely simulated with commercial codes
 (steady cavitating RANS with σ stepping) and in published OpenFOAM inducer studies.
 
-**Kill condition 2 (cascade cannot hold quasi-steady partial cavities) — criteria MET, NOT executed.**
+**Kill condition 2 (cascade cannot hold quasi-steady partial cavities) — criteria MET, EXECUTED 2026-11-17 by the owner.**
 The fair statement is "this tool chain/setup could not, within the time box", not "infeasible".
 
 ---
