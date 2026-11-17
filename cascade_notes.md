@@ -86,3 +86,9 @@
   `run_cascade_cf_v2.sh` maps A2's liquid state at t = 0.05 s (same mesh, σ_in ≈ 8.4) via mapFields.
   Mapped start stable (acoustic transient only). Schedule: hold σ 8.4 to 0.005 s, ramp to σ 0.2 by
   0.10 s, end 0.15 s; 6 cores. Speed ~2 ms / 9 min on 4 cores (acoustic CFL) → CF1 ETA ~12–15 h+.
+- CF1 on CloudHPC (cavitatingFoam, 4 cores, 4.7 h): crashed with FPE at t = 0.086 s (GAMG coarsest-level PCG
+  in the pressure solve), σ_in = 1.41 mid-ramp, vapour volume only 3e-10 m³ (V_c/d² ≈ 1e-4: onset), Cl
+  steady ≈ 0.13 until Δt fell 3.4e-7 → 1.2e-7 s in the last steps. → the compressible barotropic solver
+  also fails at cavity onset (mixture compressibility jumps ~16× when vapour appears). Results:
+  `runs/cloud_cf1/`. Option-2 test done; kill condition 2 criteria met across both solver families.
+  NOT executed — awaiting user (2026-11-17).
