@@ -132,7 +132,6 @@ The fair statement is "this tool chain/setup could not, within the time box", no
 
 | Path | Contents |
 |---|---|
-| `CLAUDE.md` | conventions, status, kill conditions, git exception |
 | `README.md` | project summary |
 | `handover.md` | this file |
 | `cascade_notes.md` | Otsuka definitions, cascade plan, full cascade setup log |
