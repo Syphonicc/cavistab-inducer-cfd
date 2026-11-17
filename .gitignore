@@ -35,3 +35,7 @@ cascade/runs/**
 !cascade/runs/*/
 !cascade/runs/*/summary.txt
 !cascade/runs/*/history.png
+
+# Assistant instruction files stay local
+CLAUDE.md
+.claude/

@@ -3,7 +3,7 @@
 > **Update 2026-11-17:** the owner invoked kill condition 2; the OpenFOAM cascade route is closed.
 > Section 6 below is the pre-decision state, kept for the record. See `docs/FINAL_ASSESSMENT.md`.
 
-Private repo: github.com/Syphonicc/cavistab · local folder: `~/Cryo_project`
+Repo: github.com/Syphonicc/cavistab-inducer-cfd
 Toolchain: OpenFOAM v2512 (ESI), Python 3 (numpy, scipy, matplotlib), CloudHPC (ESI v2512).
 
 ---
